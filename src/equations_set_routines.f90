@@ -2902,9 +2902,10 @@ CONTAINS
       IF(numberOfRows/=nonlinearMatrices%elementResidual%numberOfRows) &
         & CALL FlagError("Element matrix number of rows does not match element residual vector size.",err,error,*999)
       ! determine step size
-      CALL DistributedVector_L2Norm(parameters,delta,err,error,*999)
+      !CALL DistributedVector_L2Norm(parameters,delta,err,error,*999)
       !delta=(1.0_DP+delta)*1.0E-6_DP
-      delta=(1.0_DP+delta)*equationsSet%equations%jacobianFiniteDifferenceStepSize
+      !delta=(1.0_DP+delta)*equationsSet%equations%jacobianFiniteDifferenceStepSize
+      delta=equationsSet%equations%jacobianFiniteDifferenceStepSize
       ! the actual finite differencing algorithm is about 4 lines but since the parameters are all
       ! distributed out, have to use proper field accessing routines..
       ! so let's just loop over component, node/el, derivative
